@@ -1,0 +1,7 @@
+textarea:valid{
+  background-color:palegreen;
+}
+textarea:invalid{
+  background-color:red;
+  box-shadow:lightyellow;
+}
