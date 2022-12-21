@@ -1,7 +1,28 @@
-textarea:valid{
-  background-color:palegreen;
+#msgbox{
+  width:80%;
+  border-radius:4px;
+  margin:2% 2%;
+  padding:2% 2% ;
 }
-textarea:invalid{
-  background-color:red;
-  box-shadow:lightyellow;
+#msglist{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight:380;
+}
+.main{
+  padding:2%;
+  padding-left:9%;
+  margin:5% 20% 0% 23%;
+  background-color:#878d91;
+}
+
+#box{
+  height:60%;
+  weight:30%;
+}
+#btn{
+  height:32px;
+  width:64px;
+  border:none;
+  background-color:#154ccf;
+  color:#fff;
 }

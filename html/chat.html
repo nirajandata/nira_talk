@@ -6,10 +6,18 @@
     <link href="/static/style.css" rel="stylesheet">
   </head>
   <body>
-    <pre id="msglist"> </pre>
-    <textarea maxlength="100" minlength="3" row="5" col="60"id="msgbox" placeholder="Message here"></textarea>
+    <div class="main">
+      <center>
+        <h2> Nira Chat</h2> 
+        <div class="box">
+        <p id="msglist"> </p>
+        </div>
+      </center>
+
+    <input maxlength="100" row="5" col="60"id="msgbox" placeholder="Message here">
     <button type="submit" id="btn" onclick="chore()">Enter</button>
    </div>
    <script src="/static/socket.js"> </script>
+   </div>
   </body>
 </html>

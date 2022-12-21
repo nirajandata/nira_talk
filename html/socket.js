@@ -15,9 +15,17 @@ socket.onmessage=(e)=>{
 
 
 sent.addEventListener("keydown",(event)=>{
-  console.log(event.shiftKey)
   if(event.code=="Enter" && !event.shiftKey) {
     chore();
+  }
+  let count=String(sent.value).length;
+  console.log(count)
+  if(count>90 ){
+    sent.style.backgroundColor="yellow";
+    sent.style.borderColor="red";
+  }
+  else {
+    sent.style.backgroundColor="lightgreen";
   }
 });
 function chore(){
