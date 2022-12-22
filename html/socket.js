@@ -6,11 +6,11 @@ var btn=document.getElementById("btn")
 
 
 socket.onopen=()=>{
-  socket.send("hello there !")
+  socket.send(" namaste !")
 };
-
+let user="you"
 socket.onmessage=(e)=>{
-  view.innerText +="user xyz sent " + e.data+"\n";
+  view.innerText +=user+ e.data+"\n";
 };
 
 
@@ -19,7 +19,6 @@ sent.addEventListener("keydown",(event)=>{
     chore();
   }
   let count=String(sent.value).length;
-  console.log(count)
   if(count>90 ){
     sent.style.backgroundColor="yellow";
     sent.style.borderColor="red";
@@ -29,7 +28,7 @@ sent.addEventListener("keydown",(event)=>{
   }
 });
 function chore(){
-  socket.send(sent.value)
+  socket.send("test"+sent.value)
   sent.value='';
 }
 
