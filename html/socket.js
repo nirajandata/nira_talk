@@ -25,7 +25,8 @@ socket.onopen=()=>{
 socket.onmessage=(e)=>{
   if(you=="" && uid!="")
     you=uid;
-  prints(uid,messages);
+  prints("you : ",e.data);
+  pmsg=e.data;
 };
 sent.addEventListener("keydown",(event)=>{
   if(event.code=="Enter" && !event.shiftKey) {
