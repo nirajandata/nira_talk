@@ -8,16 +8,22 @@ import (
 )
 
 var upgrader =websocket.Upgrader{
+  CheckOrigin: func(r *http.Request) bool {
+    return true // Accepting all requests
+  },
+
   ReadBufferSize:1024,
   WriteBufferSize:1024,
 }
 
-var store=sessions.NewCookieStore([]byte("my-name-is-niraj232"))
+var store=sessions.NewCookieStore([]byte("test"))
 
 type Profile struct{
-  uid string `json:"uid"`
-  messages string `json:"messages"`
+  Uid string `json:"uid"`
+  Messages string `json:"messages"`
 }
+
+var api Profile
 
 func cut(s string) string{
   pos:=0
@@ -36,6 +42,7 @@ func main(){
   http.Handle("/static/", http.StripPrefix("/static/", fs))
   http.HandleFunc("/",mainpage)
   http.HandleFunc("/echo",sock)
+  http.HandleFunc("/encode",jsonthrow)
   log.Println("starting server 8080")
   log.Fatal(http.ListenAndServe(":8080",nil))
 }

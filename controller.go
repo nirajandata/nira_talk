@@ -3,7 +3,7 @@ package main
 import(
   "log"
   "net/http"
-  _ "encoding/json"
+   "encoding/json"
 )
 
 func mainpage(w http.ResponseWriter,r *http.Request){
@@ -23,22 +23,25 @@ func sock(w http.ResponseWriter, r * http.Request){
     messageType, value, err := conn.ReadMessage()
     if err != nil {
         log.Println(err)
-        return
+//        return
     }
     session.Values["userid"]=cut(conn.RemoteAddr().String()) 
     session.Save(r,w)
+    log.Println(session.Values["userid"])
     //todo json api
-//    api:=Profile{
-//      uid:cut(conn.RemoteAddr().String()),
-//      messages:string(value),
-//    } 
+    api=Profile{
+      Uid:cut(conn.RemoteAddr().String()),
+      Messages:string(value),
+    } 
     /// i need to add cookie of only userid
-    log.Println(string(value))
-    log.Println(api.uid,api.messages)
-    //json.NewEncoder(w).Encode(api)
     if err := conn.WriteMessage(messageType, value); err != nil {
         log.Println(err)
         return
     }
   } 
+}
+func jsonthrow(w http.ResponseWriter, r *http.Request){
+  log.Println("api test")
+  log.Println(api.Uid,api.Messages)
+  json.NewEncoder(w).Encode(api)
 }

@@ -8,12 +8,11 @@ var btn=document.getElementById("btn")
 socket.onopen=()=>{
   socket.send(" namaste !")
 };
-let user="you"
+let user=" you"
 socket.onmessage=(e)=>{
-  view.innerText +=user+ e.data+"\n";
+  view.innerText +=user+ " "+ e.data+"\n";
 };
-
-
+let uid="";
 sent.addEventListener("keydown",(event)=>{
   if(event.code=="Enter" && !event.shiftKey) {
     chore();
@@ -28,7 +27,8 @@ sent.addEventListener("keydown",(event)=>{
   }
 });
 function chore(){
-  socket.send("test"+sent.value)
+  socket.send(sent.value)
+  uid=document.cookie;
   sent.value='';
 }
 
