@@ -3,7 +3,8 @@ package main
 import(
   "log"
   "net/http"
-   "encoding/json"
+  "encoding/json"
+  "strconv"
 )
 
 func mainpage(w http.ResponseWriter,r *http.Request){
@@ -33,6 +34,12 @@ func sock(w http.ResponseWriter, r * http.Request){
       Uid:cut(conn.RemoteAddr().String()),
       Messages:string(value),
     } 
+    _,ok:=counter[api.Uid]
+    if(!ok){
+      count++
+      counter[api.Uid]="1";
+      api.Uid=strconv.Itoa(count)
+    }
     /// i need to add cookie of only userid
     if err := conn.WriteMessage(messageType, value); err != nil {
         log.Println(err)

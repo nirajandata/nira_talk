@@ -16,6 +16,8 @@ var upgrader =websocket.Upgrader{
   WriteBufferSize:1024,
 }
 
+var counter map[string] string
+var count=0
 var store=sessions.NewCookieStore([]byte("test"))
 
 type Profile struct{
