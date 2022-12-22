@@ -5,12 +5,16 @@ var view=document.getElementById("msglist")
 var sent=document.getElementById("msgbox")
 var btn=document.getElementById("btn")
 
-var you="",uid="",messages;
+var you="",uid="",messages,pmsg="";
 
 async function jsonloader(){
   const response=await fetch(url);
   const result=await response.json();
   uid=result.uid,messages=result.messages;
+  if(uid!=you && messages!=pmsg){
+  prints(uid,messages)
+  pmsg=messages;
+  }
 }
 
 setInterval(jsonloader,1000);
@@ -19,12 +23,8 @@ socket.onopen=()=>{
   socket.send("joins the chat")
 };
 socket.onmessage=(e)=>{
-
-  console.log(uid,messages);
-  if(you=="" && uid!=""){
-  you=uid;
-  }
-  if(you!=uid) uid=you; 
+  if(you=="" && uid!="")
+    you=uid;
   prints(uid,messages);
 };
 sent.addEventListener("keydown",(event)=>{
