@@ -1,18 +1,32 @@
 let socket = new WebSocket("ws://localhost:8080/echo");
+let url="http://localhost:8080/encode" 
 
 var view=document.getElementById("msglist")
 var sent=document.getElementById("msgbox")
 var btn=document.getElementById("btn")
 
+var you="",uid="",messages;
 
+async function jsonloader(){
+  const response=await fetch(url);
+  const result=await response.json();
+  uid=result.uid,messages=result.messages;
+}
+
+jsonloader();
+console.log(uid,messages);
 socket.onopen=()=>{
-  socket.send(" namaste !")
+  socket.send("joins the chat")
 };
-let user=" you"
 socket.onmessage=(e)=>{
-  view.innerText +=user+ " "+ e.data+"\n";
+
+  console.log(uid,messages);
+  if(you=="" && uid!=""){
+  you=uid;
+  }
+  if(you!=uid) uid=you; 
+  prints(uid,messages);
 };
-let uid="";
 sent.addEventListener("keydown",(event)=>{
   if(event.code=="Enter" && !event.shiftKey) {
     chore();
@@ -26,12 +40,15 @@ sent.addEventListener("keydown",(event)=>{
     sent.style.backgroundColor="lightgreen";
   }
 });
+
 function chore(){
   socket.send(sent.value)
   uid=document.cookie;
   sent.value='';
 }
-
+function prints(uid,msg){
+  view.innerText+=uid+" "+msg +'\n';
+}
 socket.onclose=(e)=>{
   socket.send("thanks for using it ")
 }
