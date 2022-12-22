@@ -13,7 +13,7 @@ async function jsonloader(){
   uid=result.uid,messages=result.messages;
 }
 
-jsonloader();
+setInterval(jsonloader,1000);
 console.log(uid,messages);
 socket.onopen=()=>{
   socket.send("joins the chat")
