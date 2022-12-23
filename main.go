@@ -40,6 +40,7 @@ func cut(s string) string{
 }
 
 func main(){
+  counter=make(map[string]string)
   fs := http.FileServer(http.Dir("html/"))
   http.Handle("/static/", http.StripPrefix("/static/", fs))
   http.HandleFunc("/",mainpage)

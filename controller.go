@@ -48,7 +48,5 @@ func sock(w http.ResponseWriter, r * http.Request){
   } 
 }
 func jsonthrow(w http.ResponseWriter, r *http.Request){
-  log.Println("api test")
-  log.Println(api.Uid,api.Messages)
   json.NewEncoder(w).Encode(api)
 }

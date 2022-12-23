@@ -11,6 +11,8 @@ async function jsonloader(){
   const response=await fetch(url);
   const result=await response.json();
   uid=result.uid,messages=result.messages;
+  if(you=="") 
+    you=uid;
   if(uid!=you && messages!=pmsg){
   prints(uid,messages)
   pmsg=messages;
@@ -23,8 +25,6 @@ socket.onopen=()=>{
   socket.send("joins the chat")
 };
 socket.onmessage=(e)=>{
-  if(you=="" && uid!="")
-    you=uid;
   prints("you : ",e.data);
   pmsg=e.data;
 };
