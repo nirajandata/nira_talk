@@ -25,7 +25,7 @@ socket.onopen=()=>{
   socket.send("joins the chat")
 };
 socket.onmessage=(e)=>{
-  prints("you : ",e.data);
+  prints("you",e.data);
   pmsg=e.data;
 };
 sent.addEventListener("keydown",(event)=>{
@@ -48,7 +48,7 @@ function chore(){
   sent.value='';
 }
 function prints(uid,msg){
-  view.innerText+=uid+" "+msg +'\n';
+  view.innerText+=uid+" : "+msg +'\n';
 }
 socket.onclose=(e)=>{
   socket.send("thanks for using it ")

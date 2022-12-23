@@ -30,16 +30,18 @@ func sock(w http.ResponseWriter, r * http.Request){
     session.Save(r,w)
     log.Println(session.Values["userid"])
     //todo json api
-    api=Profile{
-      Uid:cut(conn.RemoteAddr().String()),
-      Messages:string(value),
-    } 
-    _,ok:=counter[api.Uid]
+    location:=cut(conn.RemoteAddr().String())
+    _,ok:=counter[location]
     if(!ok){
       count++
-      counter[api.Uid]="1";
-      api.Uid=strconv.Itoa(count)
-    }
+      counter[location]="1";
+    }  
+    location=strconv.Itoa(count)
+    log.Println(location)
+    api=Profile{
+      Uid:location,
+      Messages:string(value),
+    } 
     /// i need to add cookie of only userid
     if err := conn.WriteMessage(messageType, value); err != nil {
         log.Println(err)
