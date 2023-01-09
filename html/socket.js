@@ -2,6 +2,7 @@ let socket = new WebSocket("ws://localhost:8080/echo");
 let url="http://localhost:8080/encode" 
 
 var view=document.getElementById("msglist")
+var viewbox=document.getElementById("main")
 var sent=document.getElementById("msgbox")
 var btn=document.getElementById("btn")
 
@@ -48,7 +49,6 @@ function chore(){
   sent.value='';
 }
 function prints(uid,msg){
-
   view.innerText+=uid+" : "+msg +'\n \n';
 }
 socket.onclose=(e)=>{
