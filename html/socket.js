@@ -6,7 +6,7 @@ var sent=document.getElementById("msgbox")
 var btn=document.getElementById("btn")
 
 var you="",uid="",messages,pmsg="";
-
+const colors=["red","blue","green","white","black","yellow"]
 async function jsonloader(){
   const response=await fetch(url);
   const result=await response.json();
@@ -20,11 +20,11 @@ async function jsonloader(){
 }
 
 setInterval(jsonloader,1000);
-console.log(uid,messages);
 socket.onopen=()=>{
   socket.send("joins the chat")
 };
 socket.onmessage=(e)=>{
+  view.style.color=colors[you%6];
   prints("you",e.data);
   pmsg=e.data;
 };
@@ -48,7 +48,8 @@ function chore(){
   sent.value='';
 }
 function prints(uid,msg){
-  view.innerText+=uid+" : "+msg +'\n';
+
+  view.innerText+=uid+" : "+msg +'\n \n';
 }
 socket.onclose=(e)=>{
   socket.send("thanks for using it ")
